@@ -1,5 +1,9 @@
 import Test from "@/components/Test";
-export default function Home() {
+import { getCourses } from "@/queries/courses";
+export default async function Home() {
+
+  const courses = await getCourses()
+  console.log("The courses are ", courses)
   return (
     <div>
     <Test/>
