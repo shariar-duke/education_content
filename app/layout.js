@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { dbConnect } from "@/service/mongo";
 import { Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
@@ -34,7 +35,10 @@ export const metadata = {
   description: "Explore || Learn || Build || Share",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+
+  const conn = await dbConnect()
+  console.log(conn)
   return (
     <html lang="en">
       <body className={cn(inter.className, poppins.className)}>
