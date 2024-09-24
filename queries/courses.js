@@ -3,7 +3,7 @@ import { Course } from "@/model/course-model";
 import { Module } from "@/model/module-modal";
 import { Testimonial } from "@/model/testimonial-model";
 import { User } from "@/model/user-model";
-import { quiz } from ;
+
 
 export async function getCourses() {
   const courses = await Course.find({})
