@@ -1,5 +1,5 @@
 import { MainNav } from "@/components/main-nav";
-import { SiteFooter } from "@/components/ui/site-footer";
+import { SiteFooter } from "@/components/site-footer";
 const navLinks = [
   {
     title: "Features",
