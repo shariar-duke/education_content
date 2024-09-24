@@ -2,14 +2,14 @@ import { SectionTitle } from "@/components/section-title";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getCategories } from "@/queries/categories";
-import { getCourses } from "@/queries/courses";
+import { getCourseList } from "@/queries/courses";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CourseCard from "./courses/_components/CourseCard";
 
 const HomePage = async () => {
-    const courses = await getCourses();
+    const courses = await getCourseList();
     const categories = await getCategories();
 
     return (
@@ -84,7 +84,7 @@ const HomePage = async () => {
                             >
                                 <div className="flex  flex-col gap-4 items-center justify-between rounded-md p-6">
                                     <Image
-                                        src={`/assets/images/categories/business.jpg`}
+                                        src={`/assets/images/categories/${category.thumbnail}`}
                                         alt={category.title}
                                         width={100}
                                         height={100}
