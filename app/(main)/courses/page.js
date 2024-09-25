@@ -1,12 +1,6 @@
 "use client";
 
 import { CourseProgress } from "@/components/course-progress";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/formatPrice";
 import { ArrowRight, BookOpen } from "lucide-react";
@@ -18,7 +12,6 @@ import FilterCourseMobile from "./_components/FilterCourseMobile";
 import SortCourse from "./_components/SortCourse";
 
 // for mobile sidebar
-import { Checkbox } from "@/components/ui/checkbox";
 import ActiveFilters from "./_components/ActiveFilter";
 import SearchCourse from "./_components/SearchCourse";
 const SORT_OPTIONS = [
@@ -213,7 +206,7 @@ const CoursesPage = () => {
           {/* Filters */}
           {/* these component can be re use for mobile also */}
           <div className="hidden lg:block">
-            <Accordion defaultValue={["categories"]} type="multiple">
+            
               {/* <AccordionItem value="categories">
                 <AccordionTrigger className="py-3 text-sm text-gray-400 hover:text-gray-500">
                   <span className="font-medium text-gray-900">Categories</span>
@@ -248,39 +241,7 @@ const CoursesPage = () => {
 
               <FilterCourse />
 
-              {/* Price filter */}
-              <AccordionItem value="price">
-                <AccordionTrigger className="py-3 text-sm text-gray-400 hover:text-gray-500">
-                  <span className="font-medium text-gray-900">Price</span>
-                </AccordionTrigger>
 
-                <AccordionContent className="pt-6 animate-none">
-                  <ul className="space-y-4">
-                    {PRICE_OPTIONS.map((option, optionIdx) => (
-                      <li key={option.value} className="flex items-center">
-                        <Checkbox
-                          type="checkbox"
-                          id={`price-${optionIdx}`}
-                          onCheckedChange={() => {
-                            applyArrayFilter({
-                              type: "price",
-                              value: option.value,
-                            });
-                          }}
-                          checked={filter.price.includes(option.value)}
-                        />
-                        <label
-                          htmlFor={`price-${optionIdx}`}
-                          className="ml-3 text-sm text-gray-600 cursor-pointer"
-                        >
-                          {option.label}
-                        </label>
-                      </li>
-                    ))}
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
           </div>
           {/* Course grid */}
           {/* Only This part will stay here  */}
