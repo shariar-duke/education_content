@@ -1,4 +1,4 @@
-import { replaceMongoIdInArray } from "@/lib/convertData";
+import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/lib/convertData";
 import { Category } from "@/model/category-model";
 import { Course } from "@/model/course-model";
 import { Module } from "@/model/module-modal";
@@ -37,5 +37,5 @@ export async function getCourseDetails(id) {
         model: Module
     }).lean()
 
-    return rreplaceMongoIdInObject (course)
+    return replaceMongoIdInObject(course)
 }
