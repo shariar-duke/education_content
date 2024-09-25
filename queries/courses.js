@@ -23,7 +23,8 @@ export async function getCourseList() {
 }
 
 export async function getCourseDetails(id) {
-    const  course = await Course.findById(id).populate({
+    const course = await Course.findById(id)
+    .populate({
         path: "category",
         model: Category
     }).populate({
@@ -31,11 +32,15 @@ export async function getCourseDetails(id) {
         model: User
     }).populate({
         path: "testimonials",
-        model: Testimonial
+        model: Testimonial,
+        populate: {
+            path: "user",
+            model: User
+        }
     }).populate({
         path: "modules",
         model: Module
-    }).lean()
+    }).lean();
 
     return replaceMongoIdInObject(course)
 }
