@@ -8,7 +8,7 @@ const CourseInstructor = async ({ course }) => {
 
   const courseDetailsByInstructor = await getCourseDetailsByInstructor(instructor?._id.toString())
 
-  console.log("All the coures of this instructor is", courseDetailsByInstructor)
+
 
   return (
     <div className="bg-gray-50 rounded-md p-8">
@@ -39,11 +39,11 @@ const CourseInstructor = async ({ course }) => {
               </li>
               <li className="flex space-x-3">
                 <MessageSquare className="text-gray-600" />
-                <div>1500+ Reviews</div>
+                <div>{courseDetailsByInstructor?.reviews}  Reviews</div>
               </li>
               <li className="flex space-x-3">
                 <Star className="text-gray-600" />
-                <div>4.9 Average Rating</div>
+                <div> {courseDetailsByInstructor?.ratings}  Average Rating</div>
               </li>
             </ul>
           </div>
