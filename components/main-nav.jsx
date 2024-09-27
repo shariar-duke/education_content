@@ -1,5 +1,4 @@
 "use client";
-
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
@@ -15,6 +14,9 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+
+
+
 export function MainNav({ items, children }) {
 	const [showMobileMenu, setShowMobileMenu] = useState(false);
 
