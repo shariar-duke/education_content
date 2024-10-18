@@ -1,47 +1,60 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import { authConfig } from "./auth.config";
 import { User } from "./model/user-model";
 
 import bcrypt from "bcryptjs";
 
 export const {
-    handlers: { GET, POST },
-    auth,
-    signIn,
-    signOut,
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
 } = NextAuth({
-   ...authConfig,
-    providers: [
-        CredentialsProvider({
-            async authorize(credentials) {
-                if (credentials == null) return null;
+  ...authConfig,
+  providers: [
+    CredentialsProvider({
+      async authorize(credentials) {
+        if (credentials == null) return null;
 
-                try {
-                    const user = await User.findOne({email: credentials?.email});
-                    console.log(user);
+        try {
+          const user = await User.findOne({ email: credentials?.email });
+          console.log(user);
 
-                    if (user) {
-                        const isMatch = await bcrypt.compare(
-                            credentials.password,
-                            user.password
-                        );
+          if (user) {
+            const isMatch = await bcrypt.compare(
+              credentials.password,
+              user.password
+            );
 
-                        if (isMatch) {
-                            return user;
-                        } else {
-                            console.error("password mismatch");
-                            throw new Error("Check your password");
-                        }
-                    } else {
-                        console.error("User not found");
-                        throw new Error("User not found");
-                    }
-                } catch (err) {
-                    console.error(err);
-                    throw new Error(err);
-                }
+            if (isMatch) {
+              return user;
+            } else {
+              console.error("password mismatch");
+              throw new Error("Check your password");
             }
-        })
-    ]
+          } else {
+            console.error("User not found");
+            throw new Error("User not found");
+          }
+        } catch (err) {
+          console.error(err);
+          throw new Error(err);
+        }
+      },
+    }),
+    // Using environment variables for Google OAuth configuration
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID, // Use env variable
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Use env variable
+      authorization: {
+        params: {
+          prompt: "consent", // Request consent every time
+          access_type: "offline", // Required for refresh token
+          response_type: "code",
+        },
+      },
+    }),
+  ],
 });
