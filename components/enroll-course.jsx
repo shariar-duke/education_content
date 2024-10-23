@@ -2,9 +2,12 @@ import { Button, buttonVariants } from "@/components/ui/button"; // Check if thi
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 export const EnrollCourse = ({ asLink }) => {
+  const formAction = async (data) => {
+    // Call server action from here
+  };
   return (
     <>
-      <form action="">
+      <form action={formAction}>
         {asLink ? (
           <Button
             variant="ghost"
